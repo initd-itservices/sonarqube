@@ -1,0 +1,30 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: sonarqube
+  labels:
+    app: sonarqube
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: sonarqube
+    weight: 100
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: sonarqube-insecure
+  labels:
+    app: sonarqube
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: sonarqube
+    weight: 100
